@@ -27,27 +27,50 @@ class workplace:
         else:
             pass
 
-    def search_employee(self, **kwargs):
-        employeeInfo = self.employeeInfo
-        print(kwargs.items())
-        print("Name in kwargs")
+    def search_employee(self, name=None, id=None):
+        fjoldiStarfsmanna = len(self.employeeInfo)
         teljari=0
-        for keykw, valuekw in kwargs.items():
-            if keykw == "name" or keykw == "id":
-                for key, value in employeeInfo.items():
-                    for k in key:
-                        if valuekw == k:
-                            teljari=teljari+1
-                            if teljari == len(kwargs.items()):
-                                print(value)
+        success = False
+        try:
+            for key, value in self.employeeInfo.items(): #key er key, value er listinn um employee
+                teljari = teljari + 1
+                if name is not None and id is not None:
+                    if name in key and id in key:
+                        success = True
+                        print(value)
+                    elif teljari == fjoldiStarfsmanna and success == False:
+                        print("Error: id and name didn't match any key.")
+                    else:
+                        pass
 
+                elif name in key and id is None:
+                    if name in key:
+                        print(value)
+                        success = True
+                    elif teljari == fjoldiStarfsmanna and success == False:
+                        print("Error: name didn't match any key.")
+                    else:
+                        pass
+
+                elif id in key and name is None:
+                    if id in key:
+                        print(value)
+                        success = True
+                    elif teljari == fjoldiStarfsmanna and success == False:
+                        print("Error: id didn't match any key.")
+                    else:
+                        pass
+
+                elif id not in key and name is None:
+                    pass
+
+                elif name not in key and id is None:
+                    pass
+
+        except NameError as error:
+            print(error)
 
 x = workplace()
 x.create_employee("Daníel","Arnarsson","Forritari", 90000)
 x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
-x.search_employee(name = "Daníel Arnarsson")
-
-
-
-
-
+x.search_employee(id = 1, name ="Ragnar Jónsson")

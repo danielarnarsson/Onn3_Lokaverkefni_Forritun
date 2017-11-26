@@ -109,6 +109,7 @@ class workplace:
 
         except NameError as error:
             print(error)
+
     def print_employees(self):
         for key, value in self.employeeInfo.items():
             x = 0

@@ -12,21 +12,10 @@ class workplace:
 
     def create_employee(self, fyrsta_nafn, sidasta_nafn, starfsgrein, laun):
         nafn = str(fyrsta_nafn + " " + sidasta_nafn)
+        id = len(self.employeeInfo) + 1
+        nafnOgId = (nafn, id)
+        self.employeeInfo[nafnOgId] = [id, fyrsta_nafn, sidasta_nafn, starfsgrein, laun]
 
-        try:
-            id = len(self.employeeInfo) + 1
-            nafnOgId = (nafn, id)
-            self.employeeInfo[nafnOgId] = [id, fyrsta_nafn, sidasta_nafn, starfsgrein, laun]
-
-        except NameError:
-            #unnecessary code?
-            employeeInfo = {}
-            id = len(employeeInfo) + 1
-            nafnOgId = (nafn, id)
-            self.employeeInfo = employeeInfo
-            self.employeeInfo[nafnOgId] = [id, fyrsta_nafn, sidasta_nafn, starfsgrein, laun]
-        else:
-            pass
 
     def search_employee(self, name=None, id=None):
         fjoldiStarfsmanna = len(self.employeeInfo)
@@ -133,6 +122,21 @@ class workplace:
             pass
         except Exception as e:
             print(e)
+    """
+    def change_info(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, laun=None):
+
+        if id_change is not None:
+            for key, value in self.employeeInfo():
+                x = 0
+                for v in key:
+                    x += 1
+                    if x == 1:
+                        if id == v:
+                            self.employeeInfo[]
+                        else:
+                            print("Error: input id does not match any id in list")
+    """
+
 
 
 x = workplace()
@@ -141,4 +145,3 @@ x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
 x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
 x.search_employee(name = "Ragnar Jónsson")
 x.delete_employee(id = 3, name = "Ragnar Jónsson")
-x.print_employees()

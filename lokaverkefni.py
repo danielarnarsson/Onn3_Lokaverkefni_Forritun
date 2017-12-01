@@ -26,8 +26,22 @@ class workplace:
                 teljari += 1
                 if name is not None and id is not None:
                     if name in key and id in key:
+                        x=0
+                        for v in value:
+                            x += 1
+                            if x == 1:
+                                print("Employee ID", str(v) + ":")
+                            elif x == 2:
+                                print(" First name: ", v)
+                            elif x == 3:
+                                print(" Last name:", v)
+                            elif x == 4:
+                                print(" Position:", v)
+                            elif x == 5:
+                                print(" Salary:", v)
                         success = True
-                        print(value)
+                        print()
+
                     elif teljari == fjoldiStarfsmanna and success == False:
                         print("Error: id and name didn't match any key.")
                     else:
@@ -35,8 +49,22 @@ class workplace:
 
                 elif name in key and id is None:
                     if name in key:
-                        print(value)
+                        x=0
+                        for v in value:
+                            x += 1
+                            if x == 1:
+                                print("Employee ID", str(v) + ":")
+                            elif x == 2:
+                                print(" First name: ", v)
+                            elif x == 3:
+                                print(" Last name:", v)
+                            elif x == 4:
+                                print(" Position:", v)
+                            elif x == 5:
+                                print(" Salary:", v)
                         success = True
+                        print()
+
                     elif teljari == fjoldiStarfsmanna and success == False:
                         print("Error: name didn't match any key.")
                     else:
@@ -44,8 +72,22 @@ class workplace:
 
                 elif id in key and name is None:
                     if id in key:
-                        print(value)
+                        x=0
+                        for v in value:
+                            x += 1
+                            if x == 1:
+                                print("Employee ID", str(v) + ":")
+                            elif x == 2:
+                                print(" First name: ", v)
+                            elif x == 3:
+                                print(" Last name:", v)
+                            elif x == 4:
+                                print(" Position:", v)
+                            elif x == 5:
+                                print(" Salary:", v)
                         success = True
+                        print()
+
                     elif teljari == fjoldiStarfsmanna and success == False:
                         print("Error: id didn't match any key.")
                     else:
@@ -54,10 +96,12 @@ class workplace:
                 elif id not in key and name is None:
                     if teljari == fjoldiStarfsmanna:
                         print("ID not in any key")
+                        print()
 
                 elif name not in key and id is None:
                     if teljari == fjoldiStarfsmanna:
                         print("Name not in any key")
+                        print()
 
         except NameError as error:
             print(error)
@@ -81,6 +125,7 @@ class workplace:
                     del self.employeeInfo[key]
                     if teljari  == 1:
                         print(teljari, "employee deleted.")
+                        print()
                     elif teljari > 1:
                         print(teljari, "employees deleted.")
 
@@ -98,6 +143,7 @@ class workplace:
 
         except NameError as error:
             print(error)
+        print()
 
     def print_employees(self):
         for key, value in self.employeeInfo.items():
@@ -122,26 +168,39 @@ class workplace:
             pass
         except Exception as e:
             print(e)
-    """
-    def change_info(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, laun=None):
 
-        if id_change is not None:
-            for key, value in self.employeeInfo():
-                x = 0
-                for v in key:
-                    x += 1
-                    if x == 1:
-                        if id == v:
-                            self.employeeInfo[]
-                        else:
-                            print("Error: input id does not match any id in list")
-    """
+    def change_employee(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, laun=None):
+        employeeInfo = self.employeeInfo
+        for key, value in employeeInfo.items():
+            x = 0
+            if id == key[1]:
+                if id_change is not None:
+                    if key[1] == id_change:
+                        print("Error: ID already exists")
+                        print()
+                    else:
+                        listi = list(key)
+                        listi[1] = id_change
+                        del employeeInfo[key]
+                        key = tuple(listi)
+                        value[0] = id_change
+                        employeeInfo[key] = value
+                        print()
 
+            else:
+                if x == len(employeeInfo):
+                    print("Error: input id does not match id in any key")
+        self.employeeInfo = employeeInfo
+        print()
 
 
 x = workplace()
 x.create_employee("Daníel","Arnarsson","Forritari", 90000)
 x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
 x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
-x.search_employee(name = "Ragnar Jónsson")
+x.create_employee("Sigurður", "andrason","HalloHallo",44444)
+x.search_employee(id = 2, name = "Ragnar Jónsson")
 x.delete_employee(id = 3, name = "Ragnar Jónsson")
+x.change_employee(id = 1, id_change = 5)
+x.print_employees()
+x.search_employee(id = 5)

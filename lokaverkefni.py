@@ -169,7 +169,7 @@ class workplace:
         except Exception as e:
             print(e)
 
-    def change_employee(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, laun=None):
+    def change_employee(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, change_laun=None):
         employeeInfo = self.employeeInfo
         employeeInfoCopy = employeeInfo
         x=0
@@ -191,12 +191,32 @@ class workplace:
                             employeeInfo[keyChange] = value
 
                 if fyrsta_nafn_change is not None and stop is False:
-                    pass
+                    for key,value in employeeInfo:
+                        value[1] = fyrsta_nafn_change
+                        key[0] = value[1] + value[2]
 
+                if sidasta_nafn_change is not None and stop is False:
+                    for key, value in employeeInfo:
+                        value[2] = sidasta_nafn_change
+                        key = value[1] + value[2]
+
+                if starfsgrein_change is not None and stop is False:
+                    for key,value in employeeInfo:
+                        value[3] = starfsgrein_change
+
+                if change_laun is not None and stop is False:
+                    for key, value in employeeInfo:
+                        for k in key:
+                            if k == id:
+
+
+                        for k in key:
+
+                        employeeInfo[] = change_laun
 
             else:
                 if x == len(employeeInfo):
-                    print("Error: input id does not match id in any key")
+                    print("Error: input id does not match any id")
         self.employeeInfo = employeeInfo
         print()
 
@@ -208,7 +228,5 @@ x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
 x.create_employee("Sigurður", "andrason","HalloHallo",44444)
 x.search_employee(id = 2, name = "Ragnar Jónsson")
 x.delete_employee(id = 3, name = "Ragnar Jónsson")
-x.change_employee(id = 2, id_change = 5)
-x.change_employee(id = 7, id_change = 1)
-x.change_employee(id = 2, id_change = 5)
+x.change_employee(id = 2, change_laun = 100000)
 x.print_employees()

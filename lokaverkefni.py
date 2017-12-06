@@ -171,21 +171,28 @@ class workplace:
 
     def change_employee(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, laun=None):
         employeeInfo = self.employeeInfo
-        for key, value in employeeInfo.items():
-            x = 0
+        employeeInfoCopy = employeeInfo
+        x=0
+        for key, value in employeeInfoCopy.items():
+            x = x + 1
+            stop=False
             if id == key[1]:
                 if id_change is not None:
-                    if key[1] == id_change:
-                        print("Error: ID already exists")
-                        print()
-                    else:
-                        listi = list(key)
-                        listi[1] = id_change
-                        del employeeInfo[key]
-                        key = tuple(listi)
-                        value[0] = id_change
-                        employeeInfo[key] = value
-                        print()
+                    for key, value in employeeInfoCopy.items():
+                        if key[1] == id_change:
+                            print("Error: ID already exists. All changes canceled.")
+                            stop=True
+                        else:
+                            listi = list(key)
+                            listi[1] = id_change
+                            del employeeInfo[key]
+                            keyChange = tuple(listi)
+                            value[0] = id_change
+                            employeeInfo[keyChange] = value
+
+                if fyrsta_nafn_change is not None and stop is False:
+                    pass
+
 
             else:
                 if x == len(employeeInfo):
@@ -201,6 +208,7 @@ x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
 x.create_employee("Sigurður", "andrason","HalloHallo",44444)
 x.search_employee(id = 2, name = "Ragnar Jónsson")
 x.delete_employee(id = 3, name = "Ragnar Jónsson")
-x.change_employee(id = 1, id_change = 5)
+x.change_employee(id = 2, id_change = 5)
+x.change_employee(id = 7, id_change = 1)
+x.change_employee(id = 2, id_change = 5)
 x.print_employees()
-x.search_employee(id = 5)

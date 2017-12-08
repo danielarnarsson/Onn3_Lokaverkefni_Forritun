@@ -172,16 +172,17 @@ class workplace:
     def change_employee(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, laun_change=None):
         employeeInfo = self.employeeInfo
         employeeInfoCopy = employeeInfo
+        success = False
         x=0
         for key, value in employeeInfoCopy.items():
             x = x + 1
-            stop=False
+            stop = False
             if id == key[1]:
                 if id_change is not None:
                     for key, value in employeeInfoCopy.items():
                         if key[1] == id_change:
                             print("Error: ID already exists. All changes canceled.")
-                            stop=True
+                            stop = True
 
                         if key[1] == id and stop is False:
                             listi = list(key)
@@ -196,24 +197,28 @@ class workplace:
                         if key[1] == id:
                             value[1] = fyrsta_nafn_change
                             key[0] = value[1] + value[2]
+                            success = True
 
                 if sidasta_nafn_change is not None and stop is False:
                     for key, value in employeeInfoCopy.items():
                         if key[1] == id:
                             value[2] = sidasta_nafn_change
                             key = value[1] + value[2]
+                            success = True
 
                 if starfsgrein_change is not None and stop is False:
                     for key,value in employeeInfoCopy.items():
                         if key[1] == id:
                             value[3] = starfsgrein_change
+                            success = True
 
                 if laun_change is not None and stop is False:
                     for key, value in employeeInfoCopy.items():
                         if key[1] == id:
                             value[4] = laun_change
+                            success = True
 
-            if x == len(employeeInfo) and stop = True:
+            if x == len(employeeInfo) and success == False and stop is not True:
                 print("Error: input id does not match any id")
         self.employeeInfo = employeeInfo
         print()
@@ -226,6 +231,5 @@ x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
 x.create_employee("Sigurður", "andrason","HalloHallo",44444)
 x.search_employee(id = 2, name = "Ragnar Jónsson")
 x.delete_employee(id = 3, name = "Ragnar Jónsson")
-x.change_employee(id = 2, id_change = 6)
-x.change_employee(id = 4, id_change = 7)
+x.change_employee(id = 4, id_change = 10)
 x.print_employees()

@@ -308,6 +308,3 @@ class workplace:
             print("EXCEPTION", e)
             print("PROBABLY THIS BUG: if more than one argument that changes the key of an employee is passed into the function it won't work")
         print()
-
-
-x=workplace()

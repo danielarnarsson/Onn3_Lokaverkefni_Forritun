@@ -170,21 +170,26 @@ class workplace:
             print(e)
 
     def change_employee(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, laun_change=None):
-        employeeInfo = self.employeeInfo
-        employeeInfoCopy = employeeInfo
-        success = False
-        x=0
-        for key, value in employeeInfoCopy.items():
-            x = x + 1
+        try:
+            employeeInfo = self.employeeInfo
+            success = False
             stop = False
-            if id == key[1]:
-                if id_change is not None:
-                    for key, value in employeeInfoCopy.items():
-                        if key[1] == id_change:
-                            print("Error: ID already exists. All changes canceled.")
-                            stop = True
+            x=0
+            for key, value in employeeInfo.items():
+                x = x + 1
+                if id == key[1]:
+                    if id_change is not None:
+                        for key, value in employeeInfo.items():
+                            if key[1] == id_change and key[1] == id:
+                                print("Error: id_change is same as id. All changes canceled.")
+                                stop = True
 
-                        if key[1] == id and stop is False:
+                            elif key[1] == id_change and key[1] != id:
+                                print("Error: id already exists. All changes canceled.")
+                                stop = True
+
+                    if stop is False:
+                        if id_change is not None:
                             listi = list(key)
                             listi[1] = id_change
                             del employeeInfo[key]
@@ -192,44 +197,46 @@ class workplace:
                             value[0] = id_change
                             employeeInfo[keyChange] = value
 
-                if fyrsta_nafn_change is not None and stop is False:
-                    for key,value in employeeInfoCopy.items():
-                        if key[1] == id:
+                        if fyrsta_nafn_change is not None:
                             value[1] = fyrsta_nafn_change
-                            key[0] = value[1] + value[2]
+                            listi = list(key)
+                            listi[0] = value[1] + " " + value[2]
+                            del employeeInfo[key]
+                            keyChange = tuple(listi)
+                            employeeInfo[keyChange] = value
                             success = True
 
-                if sidasta_nafn_change is not None and stop is False:
-                    for key, value in employeeInfoCopy.items():
-                        if key[1] == id:
+                        if sidasta_nafn_change is not None:
                             value[2] = sidasta_nafn_change
-                            key = value[1] + value[2]
+                            listi = list(key)
+                            key = value[1] + " " + value[2]
+                            del employeeInfo[key]
+                            keyChange = tuple(listi)
+                            employeeInfo[keyChange] = value
                             success = True
 
-                if starfsgrein_change is not None and stop is False:
-                    for key,value in employeeInfoCopy.items():
-                        if key[1] == id:
+                        if starfsgrein_change is not None:
                             value[3] = starfsgrein_change
                             success = True
 
-                if laun_change is not None and stop is False:
-                    for key, value in employeeInfoCopy.items():
-                        if key[1] == id:
+                        if laun_change is not None:
                             value[4] = laun_change
                             success = True
 
-            if x == len(employeeInfo) and success == False and stop is not True:
-                print("Error: input id does not match any id")
-        self.employeeInfo = employeeInfo
-        print()
-
+                    elif x == len(employeeInfo) and success is False and stop is False:
+                        print("Error: input id does not match any id")
+            print()
+        except Exception as e:
+            print(e)
+            print("PROBABLY THIS BUG: if more than one argument that changes the key of an employee is passed into the function it won't work")
 
 x = workplace()
-x.create_employee("Daníel","Arnarsson","Forritari", 90000)
+x.create_employee("Daníel","Arnarsson","Programmer", 90000)
 x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
 x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
-x.create_employee("Sigurður", "andrason","HalloHallo",44444)
+x.create_employee("Sigurður", "Andrason","DatabaseDesigner",95000)
 x.search_employee(id = 2, name = "Ragnar Jónsson")
 x.delete_employee(id = 3, name = "Ragnar Jónsson")
-x.change_employee(id = 4, id_change = 10)
+x.change_employee(id = 4, fyrsta_nafn_change="Sigurður", starfsgrein_change="CFO")
 x.print_employees()
+print(x.employeeInfo)

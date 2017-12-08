@@ -8,6 +8,7 @@ class workplace:
 
 
     def __init__(self):
+        """Constructor that creates a dictionary that will store all employees"""
         employeeInfo = {}
         self.employeeInfo = employeeInfo
 
@@ -232,7 +233,7 @@ class workplace:
 
 
     def change_employee(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, laun_change=None):
-        """Function for modifying an employees information."""
+        """Function for modifying an employee's information."""
         print("-----Change employee------")
         try:
             employeeInfo = self.employeeInfo

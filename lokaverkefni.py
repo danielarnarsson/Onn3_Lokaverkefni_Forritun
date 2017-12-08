@@ -1,16 +1,15 @@
 #Daníel Arnarsson
 #22.11.2017
 
-#workplace
-#make input values input("")?
-
-
 class workplace:
+    """A class that includes functions for storing, creating, searching, modifying, and deleting information about employees within a single company."""
+
     def __init__(self):
         employeeInfo = {}
         self.employeeInfo = employeeInfo
 
     def create_employee(self, fyrsta_nafn, sidasta_nafn, starfsgrein, laun):
+        """Function for creating an employee."""
         nafn = str(fyrsta_nafn + " " + sidasta_nafn)
         id = len(self.employeeInfo) + 1
         nafnOgId = (nafn, id)
@@ -18,6 +17,8 @@ class workplace:
 
 
     def search_employee(self, name=None, id=None):
+        """Function for searching for an employee/employees."""
+        print("-----Search employee------")
         fjoldiStarfsmanna = len(self.employeeInfo)
         teljari = 0
         success = False
@@ -107,6 +108,8 @@ class workplace:
             print(error)
 
     def delete_employee(self, name=None, id=None):
+        """Function for deleting an employee/employees."""
+        print("-----Delete employee------")
         fjoldiStarfsmanna = len(self.employeeInfo)
         teljari = 0
         success = False
@@ -146,6 +149,8 @@ class workplace:
         print()
 
     def print_employees(self):
+        """Function to print all employees."""
+        print("-----Print employees------")
         for key, value in self.employeeInfo.items():
             x = 0
             for v in value:
@@ -162,14 +167,9 @@ class workplace:
                     print(" Salary:", v)
             print()
 
-    def change_salary(self, id, salary=None, percentage=None):
-
-        try:
-            pass
-        except Exception as e:
-            print(e)
-
     def change_employee(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, laun_change=None):
+        """Function for modifying an employees information."""
+        print("-----Change employee------")
         try:
             employeeInfo = self.employeeInfo
             success = False
@@ -227,16 +227,6 @@ class workplace:
                         print("Error: input id does not match any id")
             print()
         except Exception as e:
-            print(e)
+            print("EXCEPTION", e)
             print("PROBABLY THIS BUG: if more than one argument that changes the key of an employee is passed into the function it won't work")
 
-x = workplace()
-x.create_employee("Daníel","Arnarsson","Programmer", 90000)
-x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
-x.create_employee("Ragnar", "Jónsson", "UI Designer", 85000)
-x.create_employee("Sigurður", "Andrason","DatabaseDesigner",95000)
-x.search_employee(id = 2, name = "Ragnar Jónsson")
-x.delete_employee(id = 3, name = "Ragnar Jónsson")
-x.change_employee(id = 4, fyrsta_nafn_change="Sigurður", starfsgrein_change="CFO")
-x.print_employees()
-print(x.employeeInfo)

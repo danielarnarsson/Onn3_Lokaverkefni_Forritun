@@ -306,12 +306,13 @@ class workplace:
 print("\n____________PARTUR 1____________\n")
 braudsmidjan = workplace()
 braudsmidjan.create_employee("Daníel", "Arnarsson", "Forritari", 500000) #Bý til starfsmann sem heitir fyrsta nafnið "Daníel", annað nafn "Arnarsson" með starfsgrein "Forritari" og laun 500000
-braudsmidjan.create_employee("Daníel", "Arnarsson", "Forritari", 500000) # id er sett sjálfkrafa ef þú skilgreinir það ekki og fer þá eftir hvað hæsta id er + 1  o.fl.
+braudsmidjan.create_employee("Daníel", "Arnarsson", "Forritari", 670000) # id er sett sjálfkrafa ef þú skilgreinir það ekki og fer þá eftir hvað hæsta id er + 1  o.fl.
 braudsmidjan.create_employee("Telma", "Árnadóttir", "Markaðssetning", 750000, 10) #id = 10
 #braudsmidjan.create_employee("Ragnar", "Sigfusson", 560000) Verður að fylla allt út (fyrir utan id) annars kemur typeError
 braudsmidjan.create_employee("Rósa", "Bjarnadóttir", "Gagnagrunns hönnuður", 560000, "Hallo") #id = "Hallo". Output er WARNING sem segir...
 braudsmidjan.create_employee("Konráð", "Guðmundsson", "Forritari", 9999999999999999999999999999999999) #Bý til starfsmann
-braudsmidjan.print_employees() #Prentar út alla starfsmenn
+#braudsmidjan.print_employees() #Prentar út alla starfsmenn
+
 print("\n\n\n____________PARTUR 2____________\n")
 braudsmidjan.search_employee(id = 1) #Prentar út starfsmann með id = 1
 braudsmidjan.search_employee(id = "Hallo") #Prentar út starfsmann með id = "Hallo"
@@ -321,22 +322,25 @@ braudsmidjan.search_employee(id = 500) #Prentar út starfsmann með id = 500
 braudsmidjan.change_employee(id = 1, id_change = 1, fyrsta_nafn_change="Flosi", laun_change=462624624246) #Ef id_change er hið sama og id þá er hætt við allar breytingar.
 braudsmidjan.change_employee(id = 1, id_change = 2, fyrsta_nafn_change="Flosi", laun_change=462624624246) #Ef id_change er núþegar til á öðrum starfsmanni, þá er líka hætt við allar breytingar.
 braudsmidjan.search_employee(id = 1) #ekkert hefur breyst
+
 print("\n\n\n____________PARTUR 3____________\n")
 braudsmidjan.create_employee("Andrés", "Önd", "staða 1", 400000, 5000) #Bý til starfsmann með id 5000
 braudsmidjan.create_employee("Andrés", "Önd", "staða 2", 450000, 6000) #Bý til starfsmann með id 6000
 braudsmidjan.create_employee("Andrés", "Önd", "staða 3", 550000, 7000) #Bý til starfsmann með id 7000
 braudsmidjan.search_employee("Andrés Önd") #Leitar af starfsmönnum sem heita fullu nafni Andrés Önd
-braudsmidjan.delete_employee(id = 5) #Gerði if statement fyrir þegar id er ekki til
+braudsmidjan.delete_employee(id = 5) #Gerði villumeldingu sem er if statement fyrir þegar id er ekki til
 braudsmidjan.delete_employee(id = 5000) #Eyðir starfsmanni með id 5000
 braudsmidjan.search_employee(id = 5000) #Error: no employees found.
 braudsmidjan.delete_employee(name="Andrés Önd") #Eyðir öllum sem heita andrés önd
 braudsmidjan.search_employee(name="Andrés Önd") #Error: no employees found.
+
 print("\n\n\n____________PARTUR 4____________\n")
 braudsmidjan.change_employee(id = 1) # bjó til if villumeldingu fyrir þetta (output: Error: no modification arguments were specified.)
 braudsmidjan.change_employee(id = 1, fyrsta_nafn_change = "Danni") #Virkar en prentar út staðfestinguna of oft
 braudsmidjan.search_employee(id = 1) #prentar út starfsmann með id = 1
 braudsmidjan.change_employee(id = 10, fyrsta_nafn_change = "Tanja", sidasta_nafn_change="Magnúsdóttir") #virkar en kemur samt villumelding (sem er ekki gott) (output: PROBABLY THIS BUG: ...)
 braudsmidjan.search_employee(id = 10) #prentar út starfsmann með id = 10
+
 braudsmidjan.change_employee(id = 10, id_change = 40, sidasta_nafn_change="Ásgeirsdóttir") #virkar en kemur samt villumelding (sem er ekki gott) (output: PROBABLY THIS BUG: ...)
 braudsmidjan.search_employee(id = 40) #prentar út starfsmann með id = 40
 braudsmidjan.change_employee(id = 40, id_change = 50, fyrsta_nafn_change="Svandís", sidasta_nafn_change="Friðriksdóttir") #Virkar að hluta til, fyrsta nafnið breytist en ekki síðasta. (output: PROBABLY THIS BUG: ...)

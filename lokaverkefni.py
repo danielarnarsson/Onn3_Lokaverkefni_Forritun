@@ -302,7 +302,7 @@ class workplace:
 
 
 
-#Virkar best ef id eru bara integer
+#Forritið virkar best ef id eru bara integer
 print("\n\n____________PARTUR 1____________\n")
 braudsmidjan = workplace()
 braudsmidjan.create_employee("Daníel", "Arnarsson", "Forritari", 500000) #Bý til starfsmann sem heitir fyrsta nafnið "Daníel", annað nafn "Arnarsson" með starfsgrein "Forritari" og laun 500000
@@ -335,10 +335,10 @@ print("\n\n\n____________PARTUR 4____________\n")
 braudsmidjan.change_employee(id = 1) # bjó til if villumeldingu fyrir þetta (output: Error: no modification arguments were specified.)
 braudsmidjan.change_employee(id = 1, fyrsta_nafn_change = "Danni") #Virkar en prentar út staðfestinguna of oft
 braudsmidjan.search_employee(id = 1) #prentar út starfsmann með id = 1
-braudsmidjan.change_employee(id = 10, fyrsta_nafn_change = "Tanja", sidasta_nafn_change="Magnúsdóttir") #virkar en kemur samt villumelding (sem er ekki gott)
+braudsmidjan.change_employee(id = 10, fyrsta_nafn_change = "Tanja", sidasta_nafn_change="Magnúsdóttir") #virkar en kemur samt villumelding (sem er ekki gott) (output: PROBABLY THIS BUG: ...)
 braudsmidjan.search_employee(id = 10) #prentar út starfsmann með id = 10
-braudsmidjan.change_employee(id = 10, id_change = 40, sidasta_nafn_change="Ásgeirsdóttir") #PROBABLY THIS BUG: ...
+braudsmidjan.change_employee(id = 10, id_change = 40, sidasta_nafn_change="Ásgeirsdóttir") #virkar en kemur samt villumelding (sem er ekki gott) (output: PROBABLY THIS BUG: ...)
 braudsmidjan.search_employee(id = 40) #prentar út starfsmann með id = 40
-braudsmidjan.change_employee(id = 40, id_change = 50, fyrsta_nafn_change="Svandís", sidasta_nafn_change="Friðriksdóttir") #PROBABLY THIS BUG: ...
+braudsmidjan.change_employee(id = 40, id_change = 50, fyrsta_nafn_change="Svandís", sidasta_nafn_change="Friðriksdóttir") #Virkar að hluta til, fyrsta nafnið breytist en ekki síðasta. (output: PROBABLY THIS BUG: ...)
 braudsmidjan.search_employee(id = 50)
 braudsmidjan.print_employees() #prentar út alla starfsmenn

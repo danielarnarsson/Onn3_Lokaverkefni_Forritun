@@ -15,13 +15,28 @@ class workplace:
 
 
 
-    def create_employee(self, fyrsta_nafn, sidasta_nafn, starfsgrein, laun):
+    def create_employee(self, fyrsta_nafn, sidasta_nafn, starfsgrein, laun,id=None):
         """Function for creating an employee."""
         nafn = str(fyrsta_nafn + " " + sidasta_nafn)
-        id = len(self.employeeInfo) + 1
+        if id is None:
+            try:
+                largest = max([key[1] for key, value in self.employeeInfo])
+                id = largest + 1
+
+
+            except ValueError:
+                id = len(self.employeeInfo) + 1
+
+
+            except TypeError:
+                id = len(self.employeeInfo) + 1
+                print("WARNING: all id's must be integers in order for auto incrementation to work properly.")
+
+        else:
+            pass
+
         nafnOgId = (nafn, id)
         self.employeeInfo[nafnOgId] = [id, fyrsta_nafn, sidasta_nafn, starfsgrein, laun]
-
 
 
 
@@ -309,3 +324,8 @@ class workplace:
             print("EXCEPTION", e)
             print("PROBABLY THIS BUG: if more than one argument that changes the key of an employee is passed into the function it won't work")
         print()
+
+x=workplace()
+x.create_employee("Daniel","Arnarsson","Forritari",800000)
+x.create_employee("Daniel","Arnarsson","Forritari",800000)
+x.print_employees()

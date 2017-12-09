@@ -303,7 +303,7 @@ class workplace:
 
 
 #Forritið virkar best ef id eru bara integer
-print("\n\n____________PARTUR 1____________\n")
+print("\n____________PARTUR 1____________\n")
 braudsmidjan = workplace()
 braudsmidjan.create_employee("Daníel", "Arnarsson", "Forritari", 500000) #Bý til starfsmann sem heitir fyrsta nafnið "Daníel", annað nafn "Arnarsson" með starfsgrein "Forritari" og laun 500000
 braudsmidjan.create_employee("Daníel", "Arnarsson", "Forritari", 500000) # id er sett sjálfkrafa ef þú skilgreinir það ekki og fer þá eftir hvað hæsta id er + 1  o.fl.

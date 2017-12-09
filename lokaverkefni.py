@@ -17,6 +17,7 @@ class workplace:
 
     def create_employee(self, fyrsta_nafn, sidasta_nafn, starfsgrein, laun,id=None):
         """Function for creating an employee."""
+        print("-----Create employee-----")
         nafn = str(fyrsta_nafn + " " + sidasta_nafn)
         if id is None:
             try:
@@ -30,19 +31,27 @@ class workplace:
 
             except TypeError:
                 id = len(self.employeeInfo) + 1
-                print("WARNING: all id's must be integers in order for auto incrementation to work properly.")
+
+            print("Successfully created employee with ID '" + str(id) + "' and full name '" + nafn + "'")
 
         else:
-            pass
+            print("Successfully created employee with ID '" + str(id) + "' and full name '" + nafn + "'")
+            if isinstance(id, int):
+                pass
+            else:
+                print("WARNING: all id's should be integers for auto incrementation to work well.")
 
         nafnOgId = (nafn, id)
         self.employeeInfo[nafnOgId] = [id, fyrsta_nafn, sidasta_nafn, starfsgrein, laun]
+        print()
+
+
 
 
 
     def search_employee(self, name=None, id=None):
         """Function for searching for an employee/employees."""
-        print("-----Search employee------")
+        print("-----Search employee-----")
         fjoldiStarfsmanna = len(self.employeeInfo)
         teljari = 0
         success = False
@@ -53,6 +62,7 @@ class workplace:
 
                 if name is not None and id is not None:
 
+
                     if name in key and id in key:
                         x=0
                         for v in value:
@@ -75,87 +85,56 @@ class workplace:
                         print()
 
 
-                    elif teljari == fjoldiStarfsmanna and success == False:
-                        print("Error: id and name didn't match any key.")
-
-
-                    else:
-                        pass
-
 
                 elif name in key and id is None:
-                    if name in key:
-                        x=0
-                        for v in value:
-                            x += 1
-                            if x == 1:
-                                print("Employee ID", str(v) + ":")
+                    x=0
+                    for v in value:
+                        x += 1
+                        if x == 1:
+                            print("Employee ID", str(v) + ":")
 
-                            elif x == 2:
-                                print(" First name: ", v)
+                        elif x == 2:
+                            print(" First name: ", v)
 
-                            elif x == 3:
-                                print(" Last name:", v)
+                        elif x == 3:
+                            print(" Last name:", v)
 
-                            elif x == 4:
-                                print(" Position:", v)
+                        elif x == 4:
+                            print(" Position:", v)
 
-                            elif x == 5:
-                                print(" Salary:", v)
-                        success = True
-                        print()
+                        elif x == 5:
+                            print(" Salary:", v)
+                    success = True
+                    print()
 
-
-                    elif teljari == fjoldiStarfsmanna and success == False:
-                        print("Error: name didn't match any key.")
-
-
-                    else:
-                        pass
 
 
                 elif id in key and name is None:
+                    x=0
+                    for v in value:
+                        x += 1
+                        if x == 1:
+                            print("Employee ID", str(v) + ":")
+
+                        elif x == 2:
+                            print(" First name: ", v)
+
+                        elif x == 3:
+                            print(" Last name:", v)
+
+                        elif x == 4:
+                            print(" Position:", v)
+
+                        elif x == 5:
+                            print(" Salary:", v)
+
+                    success = True
+                    print()
 
 
-                    if id in key:
-                        x=0
-                        for v in value:
-                            x += 1
-                            if x == 1:
-                                print("Employee ID", str(v) + ":")
-
-                            elif x == 2:
-                                print(" First name: ", v)
-
-                            elif x == 3:
-                                print(" Last name:", v)
-
-                            elif x == 4:
-                                print(" Position:", v)
-
-                            elif x == 5:
-                                print(" Salary:", v)
-
-                        success = True
-                        print()
-
-                    elif teljari == fjoldiStarfsmanna and success == False:
-                        print("Error: id didn't match any key.")
-
-                    else:
-                        pass
-
-
-                elif id not in key and name is None:
-                    if teljari == fjoldiStarfsmanna:
-                        print("ID not in any key")
-                        print()
-
-
-                elif name not in key and id is None:
-                    if teljari == fjoldiStarfsmanna:
-                        print("Name not in any key")
-                        print()
+            if success == False:
+                print("Error: employee not found.")
+            print()
 
 
         except NameError as error:
@@ -166,14 +145,12 @@ class workplace:
 
     def delete_employee(self, name=None, id=None):
         """Function for deleting an employee/employees."""
-        print("-----Delete employee------")
+        print("-----Delete employee-----")
         fjoldiStarfsmanna = len(self.employeeInfo)
         teljari = 0
         success = False
         try:
             for key, value in list(self.employeeInfo.items()):
-                teljari += 1
-
 
                 if name is not None and id is not None:
 
@@ -182,35 +159,27 @@ class workplace:
                         print("Employee deleted.")
                         success = True
 
-                    elif teljari == fjoldiStarfsmanna and success == False:
-                        print("Error: id and name didn't match any key.")
-
 
                 elif name in key and id is None:
+                    teljari += 1
                     del self.employeeInfo[key]
-
-                    if teljari == 1:
-                        print(teljari, "employee deleted.")
-                        print()
-
-                    elif teljari > 1:
-                        print(teljari, "employees deleted.")
+                    success = True
 
 
                 elif id in key and name is None:
                     del self.employeeInfo[key]
                     print("Employee deleted")
+                    success = True
 
+            if teljari == 1:
+                print(teljari, "employee deleted.")
+                print()
 
-                elif id not in key and name is None:
-                    if teljari == fjoldiStarfsmanna:
-                        print("ID not in any key")
+            elif teljari > 1:
+                print(teljari, "employees deleted.")
 
-
-                elif name not in key and id is None:
-                    if teljari == fjoldiStarfsmanna:
-                        print("Name not in any key")
-
+            elif success == False:
+                print("Error: employee not found.")
 
         except NameError as error:
             print(error)
@@ -221,7 +190,7 @@ class workplace:
 
     def print_employees(self):
         """Function to print all employees."""
-        print("-----Print employees------")
+        print("-----Print employees-----")
         for key, value in self.employeeInfo.items():
             x = 0
             for v in value:
@@ -249,7 +218,7 @@ class workplace:
 
     def change_employee(self, id, id_change=None, fyrsta_nafn_change=None, sidasta_nafn_change=None, starfsgrein_change=None, laun_change=None):
         """Function for modifying an employee's information."""
-        print("-----Change employee------")
+        print("-----Change employee-----")
         try:
             employeeInfo = self.employeeInfo
             success = False
@@ -284,6 +253,7 @@ class workplace:
                             keyChange = tuple(listi)
                             value[0] = id_change
                             employeeInfo[keyChange] = value
+                            print("ID for employee with id", key[1], "changed to: ", id_change)
 
 
                         if fyrsta_nafn_change is not None:
@@ -294,6 +264,7 @@ class workplace:
                             keyChange = tuple(listi)
                             employeeInfo[keyChange] = value
                             success = True
+                            print("First name for employee with id", key[1], "changed to: ", fyrsta_nafn_change)
 
 
                         if sidasta_nafn_change is not None:
@@ -304,28 +275,60 @@ class workplace:
                             keyChange = tuple(listi)
                             employeeInfo[keyChange] = value
                             success = True
-
+                            print("Final name for employee with id",key[1], "changed to: ", sidasta_nafn_change)
 
                         if starfsgrein_change is not None:
                             value[3] = starfsgrein_change
                             success = True
+                            print("starfsgrein for employee with id",key[1], "changed to: ", starfsgrein_change)
 
 
                         if laun_change is not None:
                             value[4] = laun_change
                             success = True
+                            print("Laun for employee with id", key[1], "changed to:", laun_change)
 
+                        if id_change is None and fyrsta_nafn_change is None and sidasta_nafn_change is None and starfsgrein_change is None and laun_change is None:
+                            print("Error: no modification arguments were specified.")
 
                     elif x == len(employeeInfo) and success is False and stop is False:
                         print("Error: input id does not match any id")
 
 
         except Exception as e:
-            print("EXCEPTION", e)
-            print("PROBABLY THIS BUG: if more than one argument that changes the key of an employee is passed into the function it won't work")
+            print("EXCEPTION:", e)
+            print("PROBABLY THIS BUG: if  id_change, first name and/or last name are changed at once it will act weird.")
         print()
 
-x=workplace()
-x.create_employee("Daniel","Arnarsson","Forritari",800000)
-x.create_employee("Daniel","Arnarsson","Forritari",800000)
-x.print_employees()
+
+
+#Virkar best ef id eru bara integer
+braudsmidjan = workplace()
+braudsmidjan.create_employee("Daníel", "Arnarsson", "Forritari", 500000) #Bý til starfsmann sem heitir fyrsta nafnið "Daníel", annað nafn "Arnarsson" með starfsgrein "Forritari" og laun 500000
+braudsmidjan.create_employee("Daníel", "Arnarsson", "Forritari", 500000) # id er sett sjálfkrafa ef þú skilgreinir það ekki og fer þá eftir hvað hæsta id er + 1  o.fl.
+braudsmidjan.create_employee("Telma", "Árnadóttir", "Markaðssetning", 750000, 10) #id = 10
+#braudsmidjan.create_employee("Ragnar", "Sigfusson", 560000) Verður að fylla allt út (fyrir utan id) annars kemur typeError
+braudsmidjan.create_employee("Rósa", "Bjarnadóttir", "Gagnagrunns hönnuður", 560000, "Hallo") #id = "Hallo". Output er WARNING sem segir...
+braudsmidjan.create_employee("Konráð", "Guðmundsson", "Forritari", 9999999999999999999999999999999999) #Bý til starfsmann
+braudsmidjan.print_employees() #Prentar út alla starfsmenn
+braudsmidjan.search_employee(id = 1) #Prentar út starfsmann með id = 1
+braudsmidjan.search_employee(id = "Hallo") #Prentar út starfsmann með id = "Hallo"
+braudsmidjan.search_employee(name="Daníel Arnarsson") #Prentar út alla sem hafa fullt nafn "Daníel Arnarsson"
+braudsmidjan.change_employee(id = 5, id_change = 500) #Virkar
+braudsmidjan.search_employee(id = 500) #Leitar af employee með id = 500
+braudsmidjan.change_employee(id = 1, id_change = 1, fyrsta_nafn_change="Flosi", laun_change=462624624246) #Ef id_change er hið sama og id þá er hætt við allar breytingar.
+braudsmidjan.change_employee(id = 1, id_change = 2, fyrsta_nafn_change="Flosi", laun_change=462624624246) #Ef id_change er núþegar til á öðrum starfsmanni, þá er líka hætt við allar breytingar.
+braudsmidjan.delete_employee(id = 5) #Gerði if statement fyrir þegar id er ekki til
+braudsmidjan.search_employee(id = 5) #leitar af starfsmanni með id = 5
+braudsmidjan.change_employee(id = 1) # bjó til if statement fyrir þetta (output: Error: no modification arguments were specified.)
+braudsmidjan.change_employee(id = 1, fyrsta_nafn_change = "Danni") #Virkar en prentar út staðfestinguna of oft
+braudsmidjan.search_employee(id = 1) #prentar út starfsmann með id = 1
+braudsmidjan.change_employee(id = 10, fyrsta_nafn_change = "Tanja", sidasta_nafn_change="Magnúsdóttir") #virkar en kemur samt villumelding (sem er ekki gott)
+braudsmidjan.search_employee(id = 10) #prentar út starfsmann með id = 10
+braudsmidjan.change_employee(id = 10, id_change = 40, sidasta_nafn_change="Ásgeirsdóttir") #PROBABLY THIS BUG: ...
+braudsmidjan.search_employee(id = 40) #prentar út starfsmann með id = 40
+braudsmidjan.change_employee(id = 40, id_change = 50, fyrsta_nafn_change="Svandís", sidasta_nafn_change="Friðriksdóttir") #PROBABLY THIS BUG: ...
+braudsmidjan.search_employee(id = 50)
+braudsmidjan.create_employee("Andrés", "Önd", "Kartöfluskrælari", 400000) #Bý til starfsmann
+braudsmidjan.search_employee("Andrés Önd") #Leitar af starfsmanni sem heitir Andrés Önd
+braudsmidjan.print_employees() #prentar út alla starfsmenn
